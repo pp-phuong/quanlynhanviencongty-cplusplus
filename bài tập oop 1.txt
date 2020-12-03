@@ -1,0 +1,49 @@
+
+Đã nhận bài tập lúc: 07:19 29/11/2020
+Đề bài:
+Viết ứng dụng quản lý nhân viên công ty 
+(Sinh viên tự suy nghĩ bổ sung thêm chức năng để hoàn thiện bài toán quản lý,
+ các chức năng cơ bản cần có: Thêm, Sửa, Xóa, Hiển thị, Tìm kiếm, Sắp xếp - con trỏ hàm) 
+ với các lớp sau (sử dụng Template, Exception & Object Relation):
+
+1) Lớp Date: ngày, tháng, năm // ok
+
+2) Lớp NhanVien: 
+
+- Mã nhân viên (string hoặc char*): gồm 8 ký tự;
+
+- Tên nhân viên (string hoặc char*);
+
+- Ngày nhận vào làm việc (kiểu Date);
+
+- Giới tính (bool): true – nữ, false – nam;
+
+- Lương (double).
+
+3) Lớp nhân viên hợp đồng (NVHD): kế thừa từ lớp NhanVien
+
+- Lương công nhật theo ngày (double); 
+
+4) Lớp nhân viên biên chế (NVBC): kế thừa từ lớp NhanVien
+
+- Hệ số lương (double): nằm trong khoảng 2.34 → 10;
+
+- Thâm niên làm việc (double): nếu số năm làm việc của nhân viên < 5 thì hệ số phụ cấp = 0, ngược lại hệ số phụ cấp = số năm làm việc / 100;
+
+* Lưu ý:
+
+- Lương NVHD = Lương công nhật * số ngày đi làm (số ngày đi làm tính từ thứ 2 đến thứ 6 & tính từ đầu tháng đến cuối tháng, lấy tháng hiện tại);
+
+- Lương NVBC = (Hệ số lương * 1.390.000) * (1 + Thâm niên làm việc).
+
+5) Lớp quản lý nhân viên (QLNV) - sử dụng class template
+
+- Tên cá nhân (string hoặc char*);
+
+- Danh sách nhân viên (sử dụng con trỏ trỏ đến mảng các đối tượng NhanVien);
+
+- Số lượng nhân viên (int): cập nhật theo số đối tượng nhân viên hiện tại.
+
+- Các chức năng quản lý ứng dụng sẽ viết trong lớp này.
+
+- Đa năng hóa toán tử nhập xuất, toán tử truy cập [] và toán tử gán (=) cho lớp
