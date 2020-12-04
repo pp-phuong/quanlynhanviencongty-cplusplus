@@ -16,6 +16,8 @@ public:
   int getDateNow();
   int getMonthNow();
   int getYearNow();
+  int getDayNow();
+  int getDaysOfMonth();
   Date getToday();
   const Date &operator=(const Date &);
   ~Date();

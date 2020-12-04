@@ -8,6 +8,7 @@ public:
   NVHD(double = 150000);
   ~NVHD();
   double tinhLuong();
+  void show();
   friend istream &operator>>(istream &, NVHD &);
   friend ostream &operator<<(ostream &, const NVHD &);
 };

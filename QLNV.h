@@ -8,22 +8,22 @@ template <class Type>
 
 class QLNV {
   private:
-    NhanVien ** data;
+    Type ** data;
     int so_luong_nv;
     int so_truong;
   public:
   QLNV();
   QLNV(int);
   void Erase();
-  int &operator[](int);
   int GetLength() const;
   void Reallocate(int);
   void Resize(int);
-  void Insert(Type &, int);
+  void Insert(Type *, int);
   void Remove(int);
   void InsertFirst(int);
   void InsertLast(int);
-  // friend ostream &operator<<(ostream &, const QLNV &);
+  // friend ostream &operator<<<Type>(ostream &, const QLNV<Type> &);
+  Type* operator[](int);
   void Xuat();
   ~QLNV();
 };

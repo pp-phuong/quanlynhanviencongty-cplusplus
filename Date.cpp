@@ -71,13 +71,50 @@ int Date::getYearNow()
   tm *ltm = localtime(&baygio);
   return 1900 + ltm->tm_year;
 }
+int Date::getDayNow()
+{
+  time_t baygio = time(0);
+  tm *ltm = localtime(&baygio);
+  return 1 + ltm->tm_wday;
+}
 Date Date::getToday()
 {
   return Date(this->getDateNow(), this->getMonthNow(), this->getYearNow());
 }
-const Date &Date::operator=(const Date & date){
+const Date &Date::operator=(const Date &date)
+{
   this->day = date.day;
-  this->month =date.month;
+  this->month = date.month;
   this->year = date.year;
   return *this;
+}
+int Date::getDaysOfMonth()
+{
+  int nam = this->getYearNow();
+  int thang = this->getMonthNow();
+  int thu = this->getDayNow();
+  int ngay = this->getDateNow();
+  if (nam % 400 == 0 || (nam % 4 == 0 && nam % 100 == 0))
+  {
+    if (thang == 2)
+    {
+      return 29;
+    }
+  }
+  else
+  {
+    if (thang == 2)
+    {
+      return 28;
+    }
+    else if (thang == 4 || thang == 6 || thang == 9 || thang == 11)
+    {
+      return 30;
+    }
+    else
+    {
+      return 31;
+    }
+  }
+  return 0;
 }

@@ -1,38 +1,16 @@
-void quanlynhanvien::nhap()
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+int main( )
 {
-  int k;
-  for (int i = 0;; i++)
-  {
-    do
-    {
-      cout << "\nloai nhan vien: \n1-van phong\n2-san xuat\n0-ket thuc\n";
-      cin >> k;
-      if (k != 1 && k != 2 && k != 0)
-        cout << "\nkhong hop le!\n";
-    } while (k != 1 && k != 2 && k != 0);
-    if (k == 0)
-      return;
-    else if (k == 1)
-    {
-      n++;
-      x[i] = new vanphong;
-    }
-    else
-    {
-      n++;
-      x[i] = new sanxuat;
-    }
-    x[i]->nhap();
-  }
-}
-void quanlynhanvien::xuat()
-{
-  cout << "so nhan vien = " << n << "\n";
-  for (int i = 0; i < n; i++)
-  {
-    cout << endl;
-    x[i]->xuat();
-    cout << "luong = " << x[i]->luong();
-    cout << endl;
-  }
+   time_t baygio = time(0);
+   tm *ltm = localtime(&baygio);
+
+   // in cac thanh phan cua cau truc tm struct.
+   cout << "Nam: "<< 1900 + ltm->tm_year << endl;
+   cout << "Thang: "<< 1 + ltm->tm_mon<< endl;
+   cout << "Ngay: "<<  ltm->tm_mday << endl;
+  cout << "Thu" << 1+  ltm->tm_wday << endl;
 }

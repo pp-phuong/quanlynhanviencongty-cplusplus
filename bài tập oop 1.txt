@@ -5,10 +5,9 @@ Viết ứng dụng quản lý nhân viên công ty
 (Sinh viên tự suy nghĩ bổ sung thêm chức năng để hoàn thiện bài toán quản lý,
  các chức năng cơ bản cần có: Thêm, Sửa, Xóa, Hiển thị, Tìm kiếm, Sắp xếp - con trỏ hàm) 
  với các lớp sau (sử dụng Template, Exception & Object Relation):
+1) Lớp Date: ngày, tháng, năm
 
-1) Lớp Date: ngày, tháng, năm // ok
-
-2) Lớp NhanVien: 
+2) Lớp NhanVien:
 
 - Mã nhân viên (string hoặc char*): gồm 8 ký tự;
 
@@ -22,7 +21,7 @@ Viết ứng dụng quản lý nhân viên công ty
 
 3) Lớp nhân viên hợp đồng (NVHD): kế thừa từ lớp NhanVien
 
-- Lương công nhật theo ngày (double); 
+- Lương công nhật theo ngày (double);
 
 4) Lớp nhân viên biên chế (NVBC): kế thừa từ lớp NhanVien
 
@@ -37,8 +36,6 @@ Viết ứng dụng quản lý nhân viên công ty
 - Lương NVBC = (Hệ số lương * 1.390.000) * (1 + Thâm niên làm việc).
 
 5) Lớp quản lý nhân viên (QLNV) - sử dụng class template
-
-- Tên cá nhân (string hoặc char*);
 
 - Danh sách nhân viên (sử dụng con trỏ trỏ đến mảng các đối tượng NhanVien);
 
