@@ -21,7 +21,7 @@ class QLNV {
   void Insert(Type *, int);
   void Remove(int);
   void InsertFirst(int);
-  void InsertLast(int);
+  void InsertLast(Type *);
   // friend ostream &operator<<<Type>(ostream &, const QLNV<Type> &);
   Type* operator[](int);
   void Xuat();

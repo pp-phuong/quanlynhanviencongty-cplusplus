@@ -77,29 +77,28 @@ void QLNV<Type>::Insert(Type *nv, int index)
   {
     this->data = new Type*[this->so_luong_nv + 1];
     *this->data = nv;
-    cout << "insert success !" << endl;
   }
   else
   {
-    Type **data = new Type*[this->so_luong_nv + 1];
+    Type **temp = new Type*[this->so_luong_nv + 1];
     for (int i = 0; i < index; i++)
     {
-      cout << "here";
-     *(data+i) = *(this->data+i);
+     *(temp+i) = *(this->data+i);
     }
-    *(data+index) = nv;
-    for (int j = index; j <= this->so_luong_nv; j++)
+    *(temp+index) = nv;
+    for (int i = index; i <= this->so_luong_nv; i++)
     {
-      cout << "here 2";
-      //  *(data+j+1) = *(this->data+j);
-      data[j+1] = this->data[j];
-      data[j+1]->show();
+      *(temp+i + 1) = *(this->data+i);
+    }
+    for (int i = 0; i < this->so_luong_nv; i++)
+    {
+     *(temp+i) = *(this->data+i);
     }
     delete[] this->data;
-    this->data = data;
+    this->data = temp;
   }
   ++this->so_luong_nv;
-  cout << "insert success";
+  cout << "insert success!";
 }
 
 template <class Type>
@@ -128,3 +127,26 @@ Type *QLNV<Type>::operator[](int index)
 //   }
 //   return o;
 // }
+template <class Type>
+void QLNV<Type>::InsertLast(Type *nv)
+{
+  assert(this->so_luong_nv >= 0);
+  if (this->so_luong_nv == 0)
+  {
+    this->data = new Type*[this->so_luong_nv + 1];
+    *this->data = nv;
+  }
+  else
+  {
+    Type **temp = new Type*[this->so_luong_nv + 1];
+    for (int i = 0; i < this->so_luong_nv; i++)
+    {
+     *(temp+i) = *(this->data+i);
+    }
+    *(temp+this->so_luong_nv) = nv;
+    delete[] this->data;
+    this->data = temp;
+  }
+  ++this->so_luong_nv;
+  cout << "insert success!";
+}

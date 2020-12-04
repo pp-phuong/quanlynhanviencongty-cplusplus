@@ -16,7 +16,10 @@ int main()
   NhanVien *a;
   a = &nv4;
   data.Insert(&nv4,0);
-  data.Insert(&nv4,1);
+  data.InsertLast(&nv4);
+    // data.Insert(&nv4,1);
+    //   data.Insert(&nv4,1);
+    //     data.Insert(&nv4,1);
   data.Xuat();
   cout << " 1";
 
