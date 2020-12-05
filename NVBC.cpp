@@ -7,6 +7,27 @@ NVBC::NVBC(string ma_nv, string ten_nv, Date ngay_nhan_viec, bool gioi_tinh, dou
 NVBC::~NVBC()
 {
 }
+double NVBC::tinhLuong()
+{
+  // (Hệ số lương * 1.390.000) * (1 + Thâm niên làm việc)
+  double l = (this->he_so_luong * 1390000) * (1 + this->tham_nien_lam_viec);
+  this->luong = l;
+  return l;
+}
+double NVBC::tinhThamNienLamViec()
+{
+  Date d = this->ngay_nhan_viec;
+  int day = d.getDateNow();
+  int mon = d.getMonthNow();
+  int year = d.getYearNow();
+  if (d.day > day)
+    mon--;
+  if (d.month > mon)
+    year--;
+  this->tham_nien_lam_viec = year - d.year;
+  cout << year - d.year << endl;
+  return this->tham_nien_lam_viec;
+}
 istream &operator>>(istream &i, NVBC &nv)
 {
   cout << "Ma nv:";
@@ -25,6 +46,10 @@ istream &operator>>(istream &i, NVBC &nv)
     }
     catch (string err)
     {
+      if (err == "year ")
+      {
+        cout << "Nam khong hop le !" << endl;
+      }
       if (err == "month")
       {
         cout << " Khong co thang thich hop !" << endl;
@@ -39,62 +64,70 @@ istream &operator>>(istream &i, NVBC &nv)
       }
     }
   } while (valid == false);
-  cout << "Gioi tinh:";
+
   do
   {
-
-    i >> nv.gioi_tinh;
-    if ((nv.gioi_tinh < 0 || nv.gioi_tinh > 1))
+    cout << "Gioi tinh:";
+    try
+    {
+      if (!(i >> nv.gioi_tinh))
+      {
+        throw true;
+      }
+    }
+    catch (bool e)
+    {
+      cin.clear();
       cout << "Gioi tinh nam : 0, gioi tinh nu : 1 " << endl
           << "Xin moi nhap lai!" << endl;
-  } while (nv.gioi_tinh < 0 || nv.gioi_tinh > 1);
-  cin.ignore();
+    }
+
+  } while (!(i >> nv.gioi_tinh));
+
   cout << "He so luong:";
   do
   {
+    i.ignore();
     i >> nv.he_so_luong;
     if (nv.he_so_luong > 10 || nv.he_so_luong < 2.4)
       cout << " He so luong nam trong khoang 2.4 -> 10 " << endl
-          << "Xin moi nhap lai!" << endl;
+           << "Xin moi nhap lai!" << endl;
   } while (nv.he_so_luong > 10 || nv.he_so_luong < 2.4);
   nv.tinhThamNienLamViec();
   nv.tinhLuong();
   return i;
 }
-double NVBC::tinhThamNienLamViec()
-{
-  Date d = this->ngay_nhan_viec;
-  int day = d.getDateNow();
-  int mon = d.getMonthNow();
-  int year = d.getYearNow();
-  if (d.day > day)
-    mon--;
-  if (d.month > mon)
-    year--;
-  this->tham_nien_lam_viec = year - d.year;
-  cout << year - d.year << endl;
-  return this->tham_nien_lam_viec;
-}
 ostream &operator<<(ostream &o, const NVBC &nv)
 {
-  o << "Ma nv" << setw(5) << " Ten NV " << setw(20) << "Ngay Nhan Viec " << setw(15) << " Gioi tinh " << setw(5) << "Luong " << setw(20) << "He so luong" << setw(3) << "Tham nien lam viec" << endl;
-  o << nv.ma_nv << setw(5) << nv.ten_nv << setw(20) << nv.ngay_nhan_viec << setw(15) ;
-  if (nv.gioi_tinh == 1) cout << "nu";
-  else cout << "nam ";
-  cout << setw(5) << nv.luong << "0000" << setw(20) << nv.he_so_luong << setw(3) << nv.tham_nien_lam_viec << endl;
+  o<< setw(6) << "Ma nv"  << setw(20) << " Ten NV "  << setw(17) << "Ngay Nhan Viec "  << setw(10)<< "Gioi tinh"  << setw(17) << "Luong"  << setw(15) << "He so luong" << setw(17) << " Tham nien lam viec" << endl;
+  o  << setw(6) << nv.ma_nv  << setw(19) << nv.ten_nv  << setw(10) << nv.ngay_nhan_viec  << setw(11);
+  if (nv.gioi_tinh == 1)
+    cout << "nu";
+  else
+    cout << "nam ";
+  cout << setw(17) << to_string(nv.luong) << setw(15) << nv.he_so_luong << setw(15) << nv.tham_nien_lam_viec << endl;
   return o;
 };
-double NVBC::tinhLuong()
+ostream &operator<<(ostream &o, const NVBC *nv)
 {
-  double l = (this->he_so_luong * 139) * (1 + this->tham_nien_lam_viec);
-  // (Hệ số lương * 1.390.000) * (1 + Thâm niên làm việc)
-  this->luong = l;
-  return l;
-}
+  o<< setw(6) << "Ma nv"  << setw(20) << " Ten NV "  << setw(17) << "Ngay Nhan Viec "  << setw(10)<< "Gioi tinh"  << setw(17) << "Luong"  << setw(15) << "He so luong" << setw(17) << " Tham nien lam viec" << endl;
+  o  << setw(6) << nv->ma_nv  << setw(19) << nv->ten_nv  << setw(10) << nv->ngay_nhan_viec  << setw(11);
+  if (nv->gioi_tinh == 1)
+    cout << "nu";
+  else
+    cout << "nam ";
+  cout << setw(17) << to_string(nv->luong) << setw(15) << nv->he_so_luong << setw(15) << nv->tham_nien_lam_viec << endl;
+  return o;
+};
+
 void NVBC::show()
 {
-  cout << this->ma_nv << setw(5) << this->ten_nv << setw(20) << this->ngay_nhan_viec << setw(15) ;
-  if (this->gioi_tinh == 1) cout << "nu";
-  else cout << "nam ";
-  cout << setw(5) << this->luong << "0000" << this->he_so_luong << setw(3) << this->tham_nien_lam_viec << endl;
+ cout<< setw(6) << "Ma nv"  << setw(20) << " Ten NV "  << setw(17) << "Ngay Nhan Viec "  << setw(10)<< "Gioi tinh"  << setw(17) << "Luong"  << setw(15) << "He so luong" << setw(17) << " Tham nien lam viec" << endl;
+  cout  << setw(6) << this->ma_nv  << setw(19) << this->ten_nv  << setw(10) << this->ngay_nhan_viec  << setw(11);
+  if (this->gioi_tinh == 1)
+    cout << "nu";
+  else
+    cout << "nam ";
+  cout << setw(17) << to_string(this->luong) << setw(15) << this->he_so_luong << setw(15) << this->tham_nien_lam_viec << endl;
+
 }

@@ -15,4 +15,5 @@ public:
   void show();
   friend istream &operator>>(istream &, NVBC &);
   friend ostream &operator<<(ostream &, const NVBC &);
+    friend ostream &operator<<(ostream &, const NVBC *);
 };
