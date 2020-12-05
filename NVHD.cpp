@@ -83,7 +83,7 @@ void NVHD::update()
       }
     }
   } while (valid == false);
-
+  bool valid_sex= false;
   do
   {
     cout << "Gioi tinh:";
@@ -91,9 +91,10 @@ void NVHD::update()
     {
       if (!(cin >> this->gioi_tinh))
       {
+        valid_sex = true;
         throw true;
       }
-      else continue;
+      else valid_sex = true;
     }
     catch (bool e)
     {
@@ -101,7 +102,7 @@ void NVHD::update()
       cout << "Gioi tinh nam : 0, gioi tinh nu : 1 " << endl
           << "Xin moi nhap lai!" << endl;
     }
-  } while (!(cin >> this->gioi_tinh));
+  } while (!valid_sex);
 
   cout << "Luong ngay:";
   cin >> this->luong_ngay;

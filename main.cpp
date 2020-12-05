@@ -1,122 +1,90 @@
 #include "QLNV.cpp"
 NVBC nvbc;
 NVHD nvhd;
-void Menu(QLNV<NhanVien> &data)
+int main()
 {
-  cout << "______________________Quan ly nhan vien cong ty_________________________" << endl
-       << "                       1. Them nhan vien" << endl
-       << "                       2. Chinh sua nhan vien " << endl
-       << "                       3. Xoa nhan vien " << endl
-       << "                       4. Xem tat ca nhan vien" << endl
-       << "                       5. Xem nhan vien hop dong " << endl
-       << "                       6. Xem nhan vien bien che " << endl
-       << "                       7. So nhan vien hien tai " << endl
-       << "                       PRESS THE NUMBER : ";
-  int m;
-  cin >> m;
-  switch (m)
+  QLNV<NhanVien> data;
+  // NVBC nv1("1", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
+  // NVBC nv2("2", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
+  // NVBC nv3("3", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
+  // NVBC nv4("4", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
+  // data.InsertFirst(&nv1);
+  // data.InsertLast(&nv2);
+  // data.InsertLast(&nv3);
+  // data.InsertLast(&nv4);
+  // data.InsertLast(&nv1);
+  // data.Xuat();
+  // data.Remove(1);
+  // data.Xuat();
+  char key;
+  do
   {
-  case 1:
-    cout << "______________________Them nhan vien_________________________" << endl
-         << "                       1. Nhan vien Bien che (NVBC)" << endl
-         << "                       2. Nhan vien Hop dong (NVHD)" << endl
+    cout << "______________________Quan ly nhan vien cong ty_________________________" << endl
+         << "                       1. Them nhan vien" << endl
+         << "                       2. Chinh sua nhan vien " << endl
+         << "                       3. Xoa nhan vien " << endl
+         << "                       4. Xem tat ca nhan vien" << endl
+         << "                       5. So nhan vien hien tai " << endl
          << "                       PRESS THE NUMBER : ";
-    int case1;
-    NhanVien *a;
-    cin >> case1;
-    switch (case1)
+    int m;
+    cin >> m;
+    switch (m)
     {
     case 1:
-      cout << "Nhap thong tin nhan vien:" << endl;
-      cin >> nvbc;
-      a = &nvbc;
+      cout << "______________________Them nhan vien_________________________" << endl
+           << "                       1. Nhan vien Bien che (NVBC)" << endl
+           << "                       2. Nhan vien Hop dong (NVHD)" << endl
+           << "                       PRESS THE NUMBER : ";
+      int case1;
+      cin >> case1;
+      switch (case1)
+      {
+      case 1:
+        cout << "Nhap thong tin nhan vien:" << endl;
+        cin >> nvbc;
+        data.InsertLast(&nvbc);
+        data.Xuat();
+        break;
+      case 2:
+        cout << "Nhap thong tin nhan vien:" << endl;
+        cin >> nvhd;
+        data.InsertLast(&nvhd);
+        data.Xuat();
+        break;
+      default:
+        cout << " Sorry,There is no matching option " << endl;
+        break;
+      }
       break;
     case 2:
-      cout << "Nhap thong tin nhan vien:" << endl;
-      cin >> nvhd;
-      a = &nvhd;
-      break;
-    default:
-      cout << " Sorry,There is no matching option " << endl;
-      break;
-    }
-    cout << "______________________Them nhan vien_________________________" << endl
-         << "                       1. Them vao dau danh sach" << endl
-         << "                       2. Them vao cuoi danh sach" << endl
-         << "                       3. Them vao vi tri k " << endl
-         << "                       PRESS THE NUMBER : ";
-    int case1_1;
-    cin >> case1_1;
-    switch (case1_1)
-    {
-    case 1:
-      data.InsertFirst(a);
+      int update;
       data.Xuat();
-      break;
-    case 2:
-      data.InsertLast(a);
+      cout << " Nhap STT nhan vien can chinh sua : " ;
+      cin >> update;
+      data.Update(update);
       data.Xuat();
       break;
     case 3:
       data.Xuat();
-      cout << "Nhap STT muon chen vao:";
-      int index;
-      cin >> index;
-      data.Insert(a, index);
+      int remove;
+      cout << "Nhap stt nhan vien can xoa :";
+      cin >> remove;
+      data.Remove(remove);
       data.Xuat();
+      break;
+    case 4:
+      data.Xuat();
+      break;
+    case 5:
+      cout << "So nhan vien hien tai : " << data.GetLength() << endl;
       break;
     default:
       cout << " Sorry,There is no matching option " << endl;
       break;
     }
-    /*cout << mv;*/
-    break;
-  case 2:
-    break;
-  case 3:
-    data.Xuat();
-    int remove;
-    cout << "Nhap stt nhan vien can xoa :";
-    cin >> remove;
-    data.Remove(remove);
-    data.Xuat();
-    break;
-  case 4:
-    data.Xuat();
-    break;
-  case 5:
-    break;
-  default:
-    cout << " Sorry,There is no matching option " << endl;
-    break;
-  }
-}
-int main()
-{
-  QLNV<NhanVien> data;
-  NVBC nv1("1", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
- NVBC nv2("2", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
- NVBC nv3("3", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
-  NVBC nv4("4", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
-data.InsertFirst(&nv1);
-data.Xuat();
-data.InsertLast(&nv2);
-data.Xuat();
-data.InsertFirst(&nv3);
-data.InsertFirst(&nv4);
-data.Xuat();
-data.Remove(1);
-data.Remove(1);
-data.Remove(1);
-data.Remove(1);
-data.Xuat();
-  // char key;
-  // do
-  // {
-  //   Menu(data);
-  //   cout << "Do you want to be continute? y/n ";
-  //   cin >> key;
-  // } while (key != 'n');
+    cout << "Do you want to be continute? y/n ";
+    cin >> key;
+  } while (key != 'n');
   // NhanVien *a;
   // a = &nv4;
   return 0;

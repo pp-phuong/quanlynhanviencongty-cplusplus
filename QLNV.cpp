@@ -49,7 +49,7 @@ void QLNV<Type>::Update(int index)
       {
         if( i = index)
         {
-          *(this->data+i)->Update();
+          this->data[i]->update();
           return;
         } 
 

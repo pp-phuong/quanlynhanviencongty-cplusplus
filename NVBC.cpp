@@ -50,6 +50,7 @@ void NVBC::update()
     }
   } while (valid == false);
 
+  bool valid_sex= false;
   do
   {
     cout << "Gioi tinh:";
@@ -57,9 +58,10 @@ void NVBC::update()
     {
       if (!(cin >> this->gioi_tinh))
       {
+        valid_sex = true;
         throw true;
       }
-      else continue;
+      else valid_sex = true;
     }
     catch (bool e)
     {
@@ -67,7 +69,7 @@ void NVBC::update()
       cout << "Gioi tinh nam : 0, gioi tinh nu : 1 " << endl
           << "Xin moi nhap lai!" << endl;
     }
-  } while (!(cin >> this->gioi_tinh));
+  } while (!valid_sex);
 
   cout << "He so luong:";
   do
