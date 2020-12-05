@@ -99,18 +99,11 @@ void QLNV<Type>::Insert(Type *nv, int index)
   }
   else
   {
-    Type **temp = new Type *[this->so_luong_nv + 1];
-    for (int i = 0; i < index; i++)
+     for (int i = this->so_luong_nv; i >index; i--)
     {
-      *(temp + i) = *(this->data + i);
+      *(this->data + i)=  *(this->data + i -1);
     }
-
-    *(temp + index) = nv;
-    for (int i = index; i <= this->so_luong_nv; i++)
-    {
-      *(temp + i + 1) = *(this->data + i);
-    }
-    this->data = temp;
+    *(this->data + index) =nv;
   }
   ++this->so_luong_nv;
   cout << "Them nhan vien thanh cong!" << endl;

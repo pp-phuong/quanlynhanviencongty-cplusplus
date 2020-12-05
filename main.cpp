@@ -74,6 +74,7 @@ void Menu(QLNV<NhanVien> &data)
   case 2:
     break;
   case 3:
+    data.Xuat();
     int remove;
     cout << "Nhap stt nhan vien can xoa :";
     cin >> remove;
@@ -94,14 +95,28 @@ int main()
 {
   QLNV<NhanVien> data;
   NVBC nv1("1", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
-
-  char key;
-  do
-  {
-    Menu(data);
-    cout << "Do you want to be continute? y/n ";
-    cin >> key;
-  } while (key != 'n');
+ NVBC nv2("2", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
+ NVBC nv3("3", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
+  NVBC nv4("4", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
+data.InsertFirst(&nv1);
+data.Xuat();
+data.InsertLast(&nv2);
+data.Xuat();
+data.InsertFirst(&nv3);
+data.InsertFirst(&nv4);
+data.Xuat();
+data.Remove(1);
+data.Remove(1);
+data.Remove(1);
+data.Remove(1);
+data.Xuat();
+  // char key;
+  // do
+  // {
+  //   Menu(data);
+  //   cout << "Do you want to be continute? y/n ";
+  //   cin >> key;
+  // } while (key != 'n');
   // NhanVien *a;
   // a = &nv4;
   return 0;

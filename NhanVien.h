@@ -20,5 +20,5 @@ class NhanVien{
     virtual bool getGioiTinh();
     virtual double getLuong();
     virtual void show();
-     NhanVien &operator=(const NhanVien &);
+    NhanVien &operator=(const NhanVien &);
 };

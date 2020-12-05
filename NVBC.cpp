@@ -7,6 +7,7 @@ NVBC::NVBC(string ma_nv, string ten_nv, Date ngay_nhan_viec, bool gioi_tinh, dou
 NVBC::~NVBC()
 {
 }
+
 double NVBC::tinhLuong()
 {
   // (Hệ số lương * 1.390.000) * (1 + Thâm niên làm việc)

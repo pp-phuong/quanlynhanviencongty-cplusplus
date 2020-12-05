@@ -12,6 +12,7 @@ public:
   double getHeSoLuong();
   double tinhThamNienLamViec();
   double tinhLuong();
+  
   void show();
   friend istream &operator>>(istream &, NVBC &);
   friend ostream &operator<<(ostream &, const NVBC &);
