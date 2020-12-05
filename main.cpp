@@ -18,9 +18,9 @@ void Menu(QLNV<NhanVien> &data)
   {
   case 1:
     cout << "______________________Them nhan vien_________________________" << endl
-       << "                       1. Nhan vien Bien che (NVBC)" << endl
-       << "                       2. Nhan vien Hop dong (NVHD)" << endl
-       << "                       PRESS THE NUMBER : ";
+         << "                       1. Nhan vien Bien che (NVBC)" << endl
+         << "                       2. Nhan vien Hop dong (NVHD)" << endl
+         << "                       PRESS THE NUMBER : ";
     int case1;
     NhanVien *a;
     cin >> case1;
@@ -41,10 +41,10 @@ void Menu(QLNV<NhanVien> &data)
       break;
     }
     cout << "______________________Them nhan vien_________________________" << endl
-      << "                       1. Them vao dau danh sach" << endl
-      << "                       2. Them vao cuoi danh sach" << endl
-      << "                       3. Them vao vi tri k " << endl
-      << "                       PRESS THE NUMBER : ";
+         << "                       1. Them vao dau danh sach" << endl
+         << "                       2. Them vao cuoi danh sach" << endl
+         << "                       3. Them vao vi tri k " << endl
+         << "                       PRESS THE NUMBER : ";
     int case1_1;
     cin >> case1_1;
     switch (case1_1)
@@ -57,12 +57,12 @@ void Menu(QLNV<NhanVien> &data)
       data.InsertLast(a);
       data.Xuat();
       break;
-      case 3:
-      int index;
+    case 3:
       data.Xuat();
-      cout << "Nhap vi tri can chen vao:" ;
+      cout << "Nhap STT muon chen vao:";
+      int index;
       cin >> index;
-      data.Insert(a,index);
+      data.Insert(a, index);
       data.Xuat();
       break;
     default:
@@ -74,8 +74,8 @@ void Menu(QLNV<NhanVien> &data)
   case 2:
     break;
   case 3:
-  int remove ;
-    cout << "Nhap stt nhan vien can xoa :" ;
+    int remove;
+    cout << "Nhap stt nhan vien can xoa :";
     cin >> remove;
     data.Remove(remove);
     data.Xuat();
@@ -94,17 +94,14 @@ int main()
 {
   QLNV<NhanVien> data;
   NVBC nv1("1", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
-  data.InsertFirst(&nv1);
-  NVHD nv2;
-  cout << nv1;
-  cout << nv2;
-  // char key;
-  // do
-  // {
-  //   Menu(data);
-  //   cout << "Do you want to be continute? y/n ";
-  //   cin >> key;
-  // } while (key != 'n');
+
+  char key;
+  do
+  {
+    Menu(data);
+    cout << "Do you want to be continute? y/n ";
+    cin >> key;
+  } while (key != 'n');
   // NhanVien *a;
   // a = &nv4;
   return 0;

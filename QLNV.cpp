@@ -132,7 +132,7 @@ void QLNV<Type>::Xuat()
        << "Danh sach nhan vien :" << endl;
   for (int i = 0; i < this->so_luong_nv; i++)
   {
-    cout << "STT:" << i << " ";
+    cout << "STT:" << i << endl;
     this->data[i]->show();
     // cout << (this->data[i]);
     // cout << *(this->data[i]);
