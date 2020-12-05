@@ -15,6 +15,72 @@ double NVBC::tinhLuong()
   this->luong = l;
   return l;
 }
+void NVBC::update()
+{
+  cout << "Ten nv:";
+  cin.ignore();
+  getline(cin, this->ten_nv);
+  cout << "Ngay nhan viec:" << endl;
+  bool valid = false;
+  do
+  {
+    try
+    {
+      cin >> this->ngay_nhan_viec;
+      valid = true;
+    }
+    catch (string err)
+    {
+      if (err == "year ")
+      {
+        cout << "Nam khong hop le !" << endl;
+      }
+      if (err == "month")
+      {
+        cout << " Khong co thang thich hop !" << endl;
+      }
+      if (err == "month2")
+      {
+        cout << " Khong co ngay thich hop trong thang 2 !" << endl;
+      }
+      if (err == "date")
+      {
+        cout << " Khong co ngay thich hop trong thang nay !" << endl;
+      }
+    }
+  } while (valid == false);
+
+  do
+  {
+    cout << "Gioi tinh:";
+    try
+    {
+      if (!(cin >> this->gioi_tinh))
+      {
+        throw true;
+      }
+      else continue;
+    }
+    catch (bool e)
+    {
+      cin.clear();
+      cout << "Gioi tinh nam : 0, gioi tinh nu : 1 " << endl
+          << "Xin moi nhap lai!" << endl;
+    }
+  } while (!(cin >> this->gioi_tinh));
+
+  cout << "He so luong:";
+  do
+  {
+  cin.ignore();
+    cin >> this->he_so_luong;
+    if (this->he_so_luong > 10 || this->he_so_luong < 2.4)
+      cout << " He so luong nam trong khoang 2.4 -> 10 " << endl
+          << "Xin moi nhap lai!" << endl;
+  } while (this->he_so_luong > 10 || this->he_so_luong < 2.4);
+  this->tinhThamNienLamViec();
+  this->tinhLuong();
+}
 double NVBC::tinhThamNienLamViec()
 {
   Date d = this->ngay_nhan_viec;

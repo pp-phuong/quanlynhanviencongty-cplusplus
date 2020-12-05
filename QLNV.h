@@ -12,14 +12,13 @@ class QLNV {
   public:
   QLNV();
   QLNV(int);
-  void Erase();
+  void Erase(); //
   int GetLength() const;
-  void Reallocate(int);
-  void Resize(int);
-  void Insert(Type *, int);
-  void Remove(int);
-  void InsertFirst(Type *);
-  void InsertLast(Type *);
+  void Insert(Type *, int);//
+  void Remove(int);//
+  void Update(int);
+  void InsertFirst(Type *);//
+  void InsertLast(Type *); //
   // friend ostream &operator<<<Type>(ostream &, const QLNV<Type> &);
   Type* operator[](int);
   void Xuat();

@@ -37,3 +37,7 @@ bool NhanVien::getGioiTinh()
 void NhanVien::show(){
     cout << this->ma_nv << setw(5) << this->ten_nv << setw(20) << this->ngay_nhan_viec << setw(15) << this->gioi_tinh << setw(5) << to_string(this->luong)<< endl;
 }
+void NhanVien::Update()
+{
+    
+}

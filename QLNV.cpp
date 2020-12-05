@@ -31,38 +31,32 @@ int QLNV<Type>::GetLength() const
 {
   return this->so_luong_nv;
 }
-// template <class Type>
-// void QLNV<Type>::Reallocate(int newLength)
-// {
-//   Erase();
-//   if(newLength <=0)
-//   return;
-//   this->data = new int[newLength];
-//   this->so_luong_nv = newLength;
-// }
-// template <class Type>
-// void QLNV<Type>::Resize(int newLength)
-// {
-//   if(newLength == this->so_luong_nv)
-//     return;
-//   if(newLength <= 0)
-//   {
-//     Erase();
-//     return;
-//   }
-//   int * data = new int[newLength];
-//   if(this->so_luong_nv >0)
-//   {
-//     int maxLength = (newLength > this->so_luong_nv) ? this->so_luong_nv: newLength;
-//     for(int i =0; i< maxLength; i++)
-//     {
-//       data[i] = (*this)[i];
-//     }
-//   }
-//   delete[] this->data;
-//   this->data = data;
-//   this->so_luong_nv = newLength;
-// }
+template <class Type>
+void QLNV<Type>::Update(int index)
+{
+   assert(index >= 0 && index <= this->so_luong_nv);
+   if( this->so_luong_nv == 0)
+   {
+     cout << "danh sach khong co nhan vien nao !" << endl;
+   }
+   else {
+     if (index < 0 || index >= this->so_luong_nv)
+    {
+      cout << "Khong co nhan vien nao o vi tri do !" << endl;
+    }
+    else {
+      for(int i = 0; i< this->so_luong_nv;i++)
+      {
+        if( i = index)
+        {
+          *(this->data+i)->Update();
+          return;
+        } 
+
+      }
+    }
+   }
+}
 template <class Type>
 void QLNV<Type>::Remove(int index)
 {
