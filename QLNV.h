@@ -1,6 +1,8 @@
+
 #include "NVBC.h"
 #include "NVHD.h"
 #include <iostream>
+#include <exception>
 using namespace std;
 #include <cassert>
 template <class Type>
@@ -19,7 +21,8 @@ class QLNV {
   void Update(int);
   void InsertFirst(Type *);//
   void InsertLast(Type *); //
-  // friend ostream &operator<<<Type>(ostream &, const QLNV<Type> &);
+  void Sort();
+  // friend ostream &operator<< <Type>(ostream &, const QLNV<Type> &);
   Type* operator[](int);
   void Xuat();
   ~QLNV();

@@ -6,7 +6,10 @@ Date::Date(int day, int month, int year)
 Date::~Date()
 {
 }
-
+int Date::getDay()
+{
+  return this->day;
+}
 int Date::getDateNow()
 {
   time_t baygio = time(0);
@@ -118,4 +121,31 @@ ostream &operator<<(ostream &o, const Date &date)
 {
   o << date.day << "/" << date.month << "/" << date.year;
   return o;
+}
+bool Date::operator>(const Date & date)
+{
+  if( this->year > date.year ) return true;
+  else 
+  {
+    if(this->month > date.month) return true;
+    else
+    {
+      if(this->day > date.day) return true;
+    }
+  }
+  return false;
+}
+bool Date::operator==(const Date & date)
+{
+  if( this->year != date.year ) return false;
+  else 
+  {
+    if(this->month  != date.month) return false;
+    else
+    {
+      if(this->day != date.day) return false;
+      else return true;
+    }
+  }
+  return true;
 }

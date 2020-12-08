@@ -144,16 +144,18 @@ istream &operator>>(istream &i, NVHD &nv)
       }
     }
   } while (valid == false);
-
-  do
+  bool valid_sex;
+   do
   {
     cout << "Gioi tinh:";
     try
     {
-      if (!(i >> nv.gioi_tinh))
+      if (!(cin >> nv.gioi_tinh))
       {
+        valid_sex = false;
         throw true;
       }
+      else valid_sex = true;
     }
     catch (bool e)
     {
@@ -161,8 +163,8 @@ istream &operator>>(istream &i, NVHD &nv)
       cout << "Gioi tinh nam : 0, gioi tinh nu : 1 " << endl
           << "Xin moi nhap lai!" << endl;
     }
+  } while (!valid_sex);
 
-  } while (!(i >> nv.gioi_tinh));
   cout << "Luong ngay:";
   cin.ignore();
   i >> nv.luong_ngay;
@@ -177,7 +179,7 @@ ostream &operator<<(ostream &o, const NVHD &nv)
     cout << "nu";
   else
     cout << "nam ";
-  cout << setw(17) << to_string(nv.luong) << setw(15) << nv.luong_ngay << endl;
+  cout << setw(17) << long(nv.luong) << setw(15) << nv.luong_ngay << endl;
   return o;
 };
 ostream &operator<<(ostream &o, const NVHD *nv)
@@ -188,7 +190,7 @@ ostream &operator<<(ostream &o, const NVHD *nv)
     cout << "nu";
   else
     cout << "nam ";
-  cout << setw(17) << to_string(nv->luong) << setw(15) << nv->luong_ngay << endl;
+  cout << setw(17) << long(nv->luong) << setw(15) << nv->luong_ngay << endl;
   return o;
 };
 
@@ -200,5 +202,5 @@ void NVHD::show()
     cout << "nu";
   else
     cout << "nam ";
-  cout << setw(17) << to_string(this->luong) << setw(15) << this->luong_ngay << endl;
+  cout << setw(17) << long(this->luong) << setw(15) << this->luong_ngay << endl;
 }

@@ -1,8 +1,9 @@
 #include "NVBC.h"
-NVBC::NVBC(string ma_nv, string ten_nv, Date ngay_nhan_viec, bool gioi_tinh, double luong, double he_so_luong, double tham_nien_lam_viec)
-    : NhanVien(ma_nv, ten_nv, ngay_nhan_viec, gioi_tinh, luong), he_so_luong(he_so_luong)
+NVBC::NVBC(string ma_nv, string ten_nv, Date ngay_nhan_viec, bool gioi_tinh, double luong, double he_so_luong, double tham_nien_lam_viec, double he_so_phu_cap)
+    : NhanVien(ma_nv, ten_nv, ngay_nhan_viec, gioi_tinh, luong), he_so_luong(he_so_luong),he_so_phu_cap(he_so_phu_cap)
 {
   this->tham_nien_lam_viec = 0;
+  this->he_so_phu_cap = 0;
 }
 NVBC::~NVBC()
 {
@@ -11,7 +12,7 @@ NVBC::~NVBC()
 double NVBC::tinhLuong()
 {
   // (Hệ số lương * 1.390.000) * (1 + Thâm niên làm việc)
-  double l = (this->he_so_luong * 1390000) * (1 + this->tham_nien_lam_viec);
+  double l = (this->he_so_luong * 1390000) * (1 + this->he_so_phu_cap);
   this->luong = l;
   return l;
 }
@@ -58,7 +59,7 @@ void NVBC::update()
     {
       if (!(cin >> this->gioi_tinh))
       {
-        valid_sex = true;
+        valid_sex = false;
         throw true;
       }
       else valid_sex = true;
@@ -94,7 +95,7 @@ double NVBC::tinhThamNienLamViec()
   if (d.month > mon)
     year--;
   this->tham_nien_lam_viec = year - d.year;
-  cout << year - d.year << endl;
+  if(this->tham_nien_lam_viec > 5) this->he_so_phu_cap = this->tham_nien_lam_viec/100;
   return this->tham_nien_lam_viec;
 }
 istream &operator>>(istream &i, NVBC &nv)
@@ -134,15 +135,18 @@ istream &operator>>(istream &i, NVBC &nv)
     }
   } while (valid == false);
 
-  do
+   bool valid_sex;
+   do
   {
     cout << "Gioi tinh:";
     try
     {
-      if (!(i >> nv.gioi_tinh))
+      if (!(cin >> nv.gioi_tinh))
       {
+        valid_sex = false;
         throw true;
       }
+      else valid_sex = true;
     }
     catch (bool e)
     {
@@ -150,9 +154,7 @@ istream &operator>>(istream &i, NVBC &nv)
       cout << "Gioi tinh nam : 0, gioi tinh nu : 1 " << endl
           << "Xin moi nhap lai!" << endl;
     }
-
-  } while (!(i >> nv.gioi_tinh));
-
+  } while (!valid_sex);
   cout << "He so luong:";
   do
   {
@@ -174,7 +176,7 @@ ostream &operator<<(ostream &o, const NVBC &nv)
     cout << "nu";
   else
     cout << "nam ";
-  cout << setw(17) << to_string(nv.luong) << setw(15) << nv.he_so_luong << setw(15) << nv.tham_nien_lam_viec << endl;
+  cout << setw(17) << long(nv.luong) << setw(15) << nv.he_so_luong << setw(15) << nv.tham_nien_lam_viec << endl;
   return o;
 };
 ostream &operator<<(ostream &o, const NVBC *nv)
@@ -185,7 +187,7 @@ ostream &operator<<(ostream &o, const NVBC *nv)
     cout << "nu";
   else
     cout << "nam ";
-  cout << setw(17) << to_string(nv->luong) << setw(15) << nv->he_so_luong << setw(15) << nv->tham_nien_lam_viec << endl;
+  cout << setw(17) << long(nv->luong) << setw(15) << nv->he_so_luong << setw(15) << nv->tham_nien_lam_viec << endl;
   return o;
 };
 
@@ -197,6 +199,6 @@ void NVBC::show()
     cout << "nu";
   else
     cout << "nam ";
-  cout << setw(17) << to_string(this->luong) << setw(15) << this->he_so_luong << setw(15) << this->tham_nien_lam_viec << endl;
+  cout << setw(17) << int(this->luong) << setw(15) << this->he_so_luong << setw(15) << this->tham_nien_lam_viec << endl;
 
 }

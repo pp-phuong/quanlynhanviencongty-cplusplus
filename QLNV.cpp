@@ -34,28 +34,29 @@ int QLNV<Type>::GetLength() const
 template <class Type>
 void QLNV<Type>::Update(int index)
 {
-   assert(index >= 0 && index <= this->so_luong_nv);
-   if( this->so_luong_nv == 0)
-   {
-     cout << "danh sach khong co nhan vien nao !" << endl;
-   }
-   else {
-     if (index < 0 || index >= this->so_luong_nv)
+  assert(index >= 0 && index <= this->so_luong_nv);
+  if (this->so_luong_nv == 0)
+  {
+    cout << "danh sach khong co nhan vien nao !" << endl;
+  }
+  else
+  {
+    if (index < 0 || index >= this->so_luong_nv)
     {
       cout << "Khong co nhan vien nao o vi tri do !" << endl;
     }
-    else {
-      for(int i = 0; i< this->so_luong_nv;i++)
+    else
+    {
+      for (int i = 0; i < this->so_luong_nv; i++)
       {
-        if( i = index)
+        if (i = index)
         {
           this->data[i]->update();
           return;
-        } 
-
+        }
       }
     }
-   }
+  }
 }
 template <class Type>
 void QLNV<Type>::Remove(int index)
@@ -85,22 +86,37 @@ void QLNV<Type>::Remove(int index)
 template <class Type>
 void QLNV<Type>::Insert(Type *nv, int index)
 {
-  assert(index >= 0 && index <= this->so_luong_nv);
-  if (this->so_luong_nv == 0)
+  try
   {
-    this->data = new Type *[this->so_luong_nv + 1];
-    *this->data = nv;
-  }
-  else
-  {
-     for (int i = this->so_luong_nv; i >index; i--)
+    cout << "insert" << endl;
+    assert(index >= 0 && index <= this->so_luong_nv);
+    if (this->so_luong_nv == 0)
     {
-      *(this->data + i)=  *(this->data + i -1);
+      this->data = new Type *[this->so_luong_nv + 1];
+      *this->data = nv;
     }
-    *(this->data + index) =nv;
+    else
+    {
+      Type **temp = new Type *[this->so_luong_nv + 1];
+      for(int i=0; i<index;i++)
+      {
+        temp[i] = this->data[i]; 
+      }
+      temp[index] = nv;
+      for (int j = index; j < this->so_luong_nv; j++)
+      {
+        temp[j+1] = this->data[j];
+      }
+      delete[] this->data;
+      this->data = temp;
+    }
+    ++this->so_luong_nv;
+    cout << "Them nhan vien thanh cong!" << endl;
   }
-  ++this->so_luong_nv;
-  cout << "Them nhan vien thanh cong!" << endl;
+  catch (invalid_argument &e)
+  {
+    cout << e.what();
+  }
 }
 template <class Type>
 void QLNV<Type>::InsertLast(Type *nv)
@@ -111,6 +127,21 @@ template <class Type>
 void QLNV<Type>::InsertFirst(Type *nv)
 {
   Insert(nv, 0);
+}
+template <class Type>
+void QLNV<Type>::Sort()
+{
+  {
+    for (int i = 0; i < this->so_luong_nv - 1; i++)
+      for (int j = i; j < this->so_luong_nv; j++)
+        if (this->data[i]->getNgayNhanViec().getDay() > this->data[j]->getNgayNhanViec().getDay())
+        {
+          NhanVien *temp;
+          temp = this->data[i];
+          this->data[i] = this->data[j];
+          this->data[j] = temp;
+        }
+  }
 }
 template <class Type>
 void QLNV<Type>::Xuat()
@@ -133,12 +164,12 @@ Type *QLNV<Type>::operator[](int index)
   return *(this->data + index);
 }
 // template <class Type>
-// ostream &operator<< <> (ostream & o, const QLNV<Type>& qlnv){
+// ostream &operator<< (ostream & o, const QLNV<Type>& qlnv){
 //   o << "Danh sach nhan vien :" << endl;
 //   for (int i = 0; i < qlnv.so_luong_nv; i++)
 //   {
 //     qlnv[i]->show();
-//     // cout << qlnv[i];
+//     // o << qlnv[i];
 //   }
 //   return o;
 // }
