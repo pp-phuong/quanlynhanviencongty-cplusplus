@@ -61,7 +61,7 @@ void QLNV<Type>::Update(int index)
 template <class Type>
 void QLNV<Type>::Remove(int index)
 {
-    try
+  try
   {
     if (index < 0 || index >= this->so_luong_nv)
     {
@@ -74,17 +74,17 @@ void QLNV<Type>::Remove(int index)
     else
     {
       Type **temp = new Type *[this->so_luong_nv - 1];
-      for(int i=0; i<index;i++)
+      for (int i = 0; i < index; i++)
       {
         temp[i] = this->data[i]; // *(this->data+ i)
       }
-      for (int j = index+1; j < this->so_luong_nv; j++)
+      for (int j = index + 1; j < this->so_luong_nv; j++)
       {
-        temp[j-1] = this->data[j];
+        temp[j - 1] = this->data[j];
       }
       delete[] this->data;
       this->data = temp;
-    --this->so_luong_nv;
+      --this->so_luong_nv;
     }
     cout << "Xoa nhan vien thanh cong!" << endl;
   }
@@ -110,20 +110,20 @@ void QLNV<Type>::Insert(Type *nv, int index)
     }
     else
     {
-      for(int i=0;i< this->so_luong_nv;i++)
+      for (int i = 0; i < this->so_luong_nv; i++)
       {
-        if(this->data[i]->getMaNV() == nv->getMaNV()) 
-        throw string("Ma nhan vien da ton tai trong danh sach !");
+        if (this->data[i]->getMaNV() == nv->getMaNV())
+          throw string("Ma nhan vien da ton tai trong danh sach !");
       }
       Type **temp = new Type *[this->so_luong_nv + 1];
-      for(int i=0; i<index;i++)
+      for (int i = 0; i < index; i++)
       {
         temp[i] = this->data[i]; // *(this->data+ i)
       }
       temp[index] = nv;
       for (int j = index; j < this->so_luong_nv; j++)
       {
-        temp[j+1] = this->data[j];
+        temp[j + 1] = this->data[j];
       }
       delete[] this->data;
       this->data = temp;
@@ -160,6 +160,31 @@ void QLNV<Type>::Sort(bool (*Compare)(Date, Date))
           this->data[j] = temp;
         }
   }
+}
+template <class Type>
+void QLNV<Type>::SearchMaNV(string ma_nv)
+{
+  cout << "Nhan vien duoc tim thay : " << endl;
+  for (int i = 0; i < this->so_luong_nv; i++)
+  {
+    if (this->data[i]->getMaNV() == ma_nv)
+      this->data[i]->show();
+  }
+}
+template <class Type>
+void QLNV<Type>::SearchNgayNhanViec(Date date)
+{
+  int count = 0;
+  cout << "Cac nhan vien duoc tim thay : " << endl;
+  for (int i = 0; i < this->so_luong_nv; i++)
+  {
+    if (this->data[i]->getNgayNhanViec() == date)
+    {
+      this->data[i]->show();
+      count++;
+    }
+  }
+  cout << " So nhan vien duoc tim thay : " << count << endl;
 }
 template <class Type>
 void QLNV<Type>::Xuat()

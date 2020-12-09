@@ -22,6 +22,8 @@ class QLNV {
   void InsertFirst(Type *);//
   void InsertLast(Type *); //
   void Sort(bool (*Compare)(Date, Date));
+  void SearchMaNV(string);
+  void SearchNgayNhanViec(Date);
   // friend ostream &operator<< <Type>(ostream &, const QLNV<Type> &);
   Type* operator[](int);
   void Xuat();

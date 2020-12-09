@@ -18,8 +18,8 @@ class NhanVien{
     virtual string getTenNV();
     virtual Date getNgayNhanViec();
     virtual bool getGioiTinh();
-    virtual double getLuong();
-    virtual void show();
-    virtual void update();
+    virtual double getLuong() ;
+    virtual void show() = 0;
+    virtual void update() = 0;
     NhanVien &operator=(const NhanVien &);
 };

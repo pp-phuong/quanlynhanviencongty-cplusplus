@@ -20,6 +20,7 @@ double NVHD::tinhLuong()
   {
     if (thu_dang_xet <= 6 && thu_dang_xet >= 2)
     {
+
       count++;
       this->luong += this->luong_ngay;
       thu_dang_xet++;
@@ -32,6 +33,8 @@ double NVHD::tinhLuong()
     }
   }
   thu_dang_xet = thu - 1;
+  if (thu_dang_xet == 1)
+    thu_dang_xet = 8;
   for (int i = ngay_hien_tai - 1; i >= 1; i--)
   {
     if (thu_dang_xet <= 6 && thu_dang_xet >= 2)
@@ -43,8 +46,10 @@ double NVHD::tinhLuong()
     else
     {
       thu_dang_xet--;
-      if (thu_dang_xet == 1)
-        thu_dang_xet = 8;
+      if (thu_dang_xet == 0)
+      {
+        thu_dang_xet = 7;
+      }
     }
   }
   return this->luong;
@@ -83,7 +88,7 @@ void NVHD::update()
       }
     }
   } while (valid == false);
-  bool valid_sex= false;
+  bool valid_sex = false;
   do
   {
     cout << "Gioi tinh:";
@@ -94,13 +99,14 @@ void NVHD::update()
         valid_sex = true;
         throw true;
       }
-      else valid_sex = true;
+      else
+        valid_sex = true;
     }
     catch (bool e)
     {
       cin.clear();
       cout << "Gioi tinh nam : 0, gioi tinh nu : 1 " << endl
-          << "Xin moi nhap lai!" << endl;
+           << "Xin moi nhap lai!" << endl;
     }
   } while (!valid_sex);
 
@@ -145,7 +151,7 @@ istream &operator>>(istream &i, NVHD &nv)
     }
   } while (valid == false);
   bool valid_sex;
-   do
+  do
   {
     cout << "Gioi tinh:";
     try
@@ -155,13 +161,14 @@ istream &operator>>(istream &i, NVHD &nv)
         valid_sex = false;
         throw true;
       }
-      else valid_sex = true;
+      else
+        valid_sex = true;
     }
     catch (bool e)
     {
       cin.clear();
       cout << "Gioi tinh nam : 0, gioi tinh nu : 1 " << endl
-          << "Xin moi nhap lai!" << endl;
+           << "Xin moi nhap lai!" << endl;
     }
   } while (!valid_sex);
 
@@ -173,8 +180,8 @@ istream &operator>>(istream &i, NVHD &nv)
 };
 ostream &operator<<(ostream &o, const NVHD &nv)
 {
-   o<< setw(6) << "Ma nv"  << setw(20) << " Ten NV "  << setw(17) << "Ngay Nhan Viec "  << setw(10)<< "Gioi tinh"  << setw(17) << "Luong"  << setw(15) << "Luong ngay" <<  endl;
-  o  << setw(6) << nv.ma_nv  << setw(19) << nv.ten_nv  << setw(10) << nv.ngay_nhan_viec  << setw(11);
+  o << setw(6) << "Ma nv" << setw(20) << " Ten NV " << setw(17) << "Ngay Nhan Viec " << setw(10) << "Gioi tinh" << setw(17) << "Luong" << setw(15) << "Luong ngay" << endl;
+  o << setw(6) << nv.ma_nv << setw(19) << nv.ten_nv << setw(10) << nv.ngay_nhan_viec << setw(11);
   if (nv.gioi_tinh == 1)
     cout << "nu";
   else
@@ -184,8 +191,8 @@ ostream &operator<<(ostream &o, const NVHD &nv)
 };
 ostream &operator<<(ostream &o, const NVHD *nv)
 {
-   o<< setw(6) << "Ma nv"  << setw(20) << " Ten NV "  << setw(17) << "Ngay Nhan Viec "  << setw(10)<< "Gioi tinh"  << setw(17) << "Luong"  << setw(15) << "Luong ngay" <<  endl;
-  o  << setw(6) << nv->ma_nv  << setw(19) << nv->ten_nv  << setw(10) << nv->ngay_nhan_viec  << setw(11);
+  o << setw(6) << "Ma nv" << setw(20) << " Ten NV " << setw(17) << "Ngay Nhan Viec " << setw(10) << "Gioi tinh" << setw(17) << "Luong" << setw(15) << "Luong ngay" << endl;
+  o << setw(6) << nv->ma_nv << setw(19) << nv->ten_nv << setw(10) << nv->ngay_nhan_viec << setw(11);
   if (nv->gioi_tinh == 1)
     cout << "nu";
   else
@@ -196,8 +203,8 @@ ostream &operator<<(ostream &o, const NVHD *nv)
 
 void NVHD::show()
 {
-  cout << setw(6) << "Ma nv"  << setw(20) << " Ten NV "  << setw(17) << "Ngay Nhan Viec "  << setw(10)<< "Gioi tinh"  << setw(17) << "Luong"  << setw(15) << "Luong ngay" <<  endl;
-  cout << setw(6) << this->ma_nv  << setw(19) << this->ten_nv  << setw(10) << this->ngay_nhan_viec  << setw(11);
+  cout << setw(6) << "Ma nv" << setw(20) << " Ten NV " << setw(17) << "Ngay Nhan Viec " << setw(10) << "Gioi tinh" << setw(17) << "Luong" << setw(15) << "Luong ngay" << endl;
+  cout << setw(6) << this->ma_nv << setw(19) << this->ten_nv << setw(10) << this->ngay_nhan_viec << setw(11);
   if (this->gioi_tinh == 1)
     cout << "nu";
   else

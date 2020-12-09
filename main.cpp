@@ -14,6 +14,8 @@ int main()
   NVBC nvbc[100];
   NVHD nvhd[100];
   int bc = 0, hd = 0;
+  string ma_nv;
+  Date ngaynhanviec;
   // NVBC nv1("1", "Tran Thi Phuong", Date(1, 1, 2019), 1, 1000000, 5);
   // NVBC nv2("2", "Tran Thi Phuong", Date(1, 1, 2020), 1, 1000000, 5);
   // NVBC nv3("3", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
@@ -37,6 +39,7 @@ int main()
          << "                       4. Xem tat ca nhan vien" << endl
          << "                       5. So nhan vien hien tai " << endl
          << "                       6. Sap xep nhan vien theo ngay nhan viec " << endl
+         << "                       7. Tim kiem nhan vien " << endl
          << "                       PRESS THE NUMBER : ";
     int m;
     cin >> m;
@@ -57,20 +60,23 @@ int main()
         cin >> nvbc[bc];
         a = &nvbc[bc];
         bc++;
+        data.InsertLast(a);
+        data.Xuat();
+        a = nullptr;
         break;
       case 2:
         cout << "Nhap thong tin nhan vien:" << endl;
         cin >> nvhd[hd];
         a = &nvhd[hd];
         hd++;
+        data.InsertLast(a);
+        data.Xuat();
+        a = nullptr;
         break;
       default:
         cout << " Sorry,There is no matching option " << endl;
         break;
       }
-      data.InsertLast(a);
-      data.Xuat();
-      a = nullptr;
       break;
     case 2:
       int update;
@@ -105,15 +111,40 @@ int main()
       {
       case 1:
         data.Sort(asc);
+              data.Xuat();
         break;
       case 2:
         data.Sort(desc);
+              data.Xuat();
         break;
       default:
         cout << " Sorry,There is no matching option " << endl;
         break;
       }
-      data.Xuat();
+      break;
+    case 7:
+      cout << "______________________Chon kieu Tim kiem_________________________" << endl
+           << "                       1.Theo ma nhan vien" << endl
+           << "                       2.Theo ngay nhan viec" << endl
+           << "                     PRESS THE NUMBER : ";
+      int case7;
+      cin >> case7;
+      switch (case7)
+      {
+      case 1:
+        cout << "Nhap ma nhan vien can tim kiem : ";
+        cin >> ma_nv;
+        data.SearchMaNV(ma_nv);
+        break;
+      case 2:
+        cout << "Nhap ngay nhan viec can tim kiem:";
+        cin >> ngaynhanviec;
+        data.SearchNgayNhanViec(ngaynhanviec);
+        break;
+      default:
+        cout << " Sorry,There is no matching option " << endl;
+        break;
+      }
       break;
     }
     cout << "Do you want to be continute? y/n ";
