@@ -1,11 +1,19 @@
 #include "QLNV.cpp"
+bool asc(Date a, Date b)
+{
+  return a > b;
+}
+bool desc(Date a, Date b)
+{
+  return !(a > b); // <=
+}
 
 int main()
 {
   QLNV<NhanVien> data;
   NVBC nvbc[100];
   NVHD nvhd[100];
-  int bc = 0,hd= 0;
+  int bc = 0, hd = 0;
   // NVBC nv1("1", "Tran Thi Phuong", Date(1, 1, 2019), 1, 1000000, 5);
   // NVBC nv2("2", "Tran Thi Phuong", Date(1, 1, 2020), 1, 1000000, 5);
   // NVBC nv3("3", "Tran Thi Phuong", Date(1, 1, 2018), 1, 1000000, 5);
@@ -86,12 +94,26 @@ int main()
     case 5:
       cout << "So nhan vien hien tai : " << data.GetLength() << endl;
       break;
-      case 6:
-      data.Sort();
+    case 6:
+      cout << "______________________Chon kieu sap xep_________________________" << endl
+           << "                       1.Tang dan" << endl
+           << "                       2.Giam dan" << endl
+           << "                     PRESS THE NUMBER : ";
+      int case6;
+      cin >> case6;
+      switch (case6)
+      {
+      case 1:
+        data.Sort(asc);
+        break;
+      case 2:
+        data.Sort(desc);
+        break;
+      default:
+        cout << " Sorry,There is no matching option " << endl;
+        break;
+      }
       data.Xuat();
-      break;
-    default:
-      cout << " Sorry,There is no matching option " << endl;
       break;
     }
     cout << "Do you want to be continute? y/n ";
